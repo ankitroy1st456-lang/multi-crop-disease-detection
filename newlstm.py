@@ -1501,7 +1501,7 @@ with tab2:
     district_choice = st.selectbox("Select target Nepal District", list(district_coords.keys()))
     crop_choice = st.selectbox("Select Target Crop", ["Paddy (Rice)", "Maize (Coming Soon)", "Wheat (Coming Soon)"])
 
-    if st.button("Calculate Expected Yield"):
+    if st.button("Calculate Expected Yield"): 
         with st.spinner("Connecting to global satellite feeds to pull real-world seasonal data..."):
             coords = district_coords[district_choice]
             base_url = "https://archive-api.open-meteo.com/v1/archive"
@@ -1577,9 +1577,11 @@ with tab2:
                             # Concatenate 30 static slots + 3 weather slots = 33 dimensions
                             week_33d = np.concatenate([static_30d, weather_3d])
                             scaled_sequence.append(week_33d)
+                            
 
                         # 3. Create input tensor array of shape [1, 27, 33]
-                        input_tensor = torch.tensor([scaled_sequence], dtype=torch.float32).to(DEVICE)
+                        scaled_sequence=np.array([scaled_sequence])
+                        input_tensor = torch.tensor(scaled_sequence, dtype=torch.float32).to(DEVICE)
 
                         yield_model = load_yield_model()
 
