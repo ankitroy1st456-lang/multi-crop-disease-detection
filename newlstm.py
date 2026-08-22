@@ -214,7 +214,7 @@ with tab1:
     with st.expander("Required disease model files"):
         st.write(f"- `{GATEKEEPER_PATH}` (gatekeeper)")
         for plant in DISEASE_CLASSES:
-            num_classes = len(DISEASE_CLASSES[plant]) - ("invalid" in DISEASE_CLASSES[plant])
+            num_classes = len(DISEASE_CLASSES[plant]) - ("Invalid" in DISEASE_CLASSES[plant])
             st.write(f"- `{disease_model_filename(plant)}` ( {num_classes} classes )")
 
 # ============================================================
